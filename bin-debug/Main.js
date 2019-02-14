@@ -168,7 +168,8 @@ var Main = (function (_super) {
         }
         bg.x = (GameUtil.getStageWidth() - bg.width) / 2;
         // init scene
-        // todo...
+        SceneController.instance.setStage(container);
+        SceneController.initGame();
     };
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。

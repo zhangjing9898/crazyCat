@@ -5,8 +5,8 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var SceneController = (function () {
     function SceneController() {
         this.startScene = new StartScene();
-        this.playScene = new PlayScene();
-        this.endScene = new EndScene();
+        // this.playScene = new PlayScene();
+        // this.endScene = new EndScene();
     }
     Object.defineProperty(SceneController, "instance", {
         get: function () {
@@ -21,6 +21,22 @@ var SceneController = (function () {
     // 设置存放游戏场景的容器
     SceneController.prototype.setStage = function (stage) {
         this._stage = stage;
+    };
+    // 初始化
+    SceneController.initGame = function () {
+        var stage = this.instance._stage;
+        // if (this.instance.playScene.parent) {
+        //     // 如果有游戏场景，先移除
+        //     stage.removeChild(this.instance.playScene)
+        //     // TODO:
+        // }
+        // if (this.instance.endScene.parent) {
+        //     // 如果有结束场景，移除掉
+        //     stage.removeChild(this.instance.endScene)
+        //     // TODO:
+        // }
+        // 添加开始场景
+        stage.addChild(this.instance.startScene);
     };
     return SceneController;
 }());

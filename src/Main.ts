@@ -113,7 +113,8 @@ class Main extends egret.DisplayObjectContainer {
         bg.x = (GameUtil.getStageWidth() - bg.width) / 2;
 
         // init scene
-        // todo...
+        SceneController.instance.setStage(container)
+        SceneController.initGame()
     }
 
     /**

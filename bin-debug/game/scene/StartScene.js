@@ -17,6 +17,14 @@ var StartScene = (function (_super) {
     StartScene.prototype.initView = function () {
         var cat = GameUtil.createBitmapByName('cat_start_bg');
         this.addChild(cat);
+        cat.x = (GameUtil.getStageWidth() - cat.width) / 2;
+        cat.y = (GameUtil.getStageHeight() - cat.height) / 2 + 100;
+        var startBtn = GameUtil.createBitmapByName('btn_start');
+        this.addChild(startBtn);
+        startBtn.x = (GameUtil.getStageWidth() - startBtn.width) / 2;
+        startBtn.y = cat.y + cat.height;
+        // 按钮添加缩放效果
+        // TODO:
     };
     return StartScene;
 }(BaseScene));
