@@ -12,6 +12,8 @@ class StartScene extends BaseScene {
         startBtn.x = (GameUtil.getStageWidth() - startBtn.width) / 2;
         startBtn.y = cat.y + cat.height
         // 按钮添加缩放效果
-        // TODO:
+        GameUtil.bitmapToBtn(startBtn, ()=>{
+            console.log('开始游戏');
+        })
     }
 }

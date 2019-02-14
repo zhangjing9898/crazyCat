@@ -24,7 +24,9 @@ var StartScene = (function (_super) {
         startBtn.x = (GameUtil.getStageWidth() - startBtn.width) / 2;
         startBtn.y = cat.y + cat.height;
         // 按钮添加缩放效果
-        // TODO:
+        GameUtil.bitmapToBtn(startBtn, function () {
+            console.log('开始游戏');
+        });
     };
     return StartScene;
 }(BaseScene));
