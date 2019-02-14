@@ -26,6 +26,8 @@ var StartScene = (function (_super) {
         // 按钮添加缩放效果
         GameUtil.bitmapToBtn(startBtn, function () {
             console.log('开始游戏');
+            n.GameData.level = 0;
+            SceneController.showPlayScene();
         });
     };
     return StartScene;

@@ -14,6 +14,8 @@ class StartScene extends BaseScene {
         // 按钮添加缩放效果
         GameUtil.bitmapToBtn(startBtn, ()=>{
             console.log('开始游戏');
+            n.GameData.level = 0
+            SceneController.showPlayScene()
         })
     }
 }

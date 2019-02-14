@@ -24,10 +24,10 @@ var PlayScene = (function (_super) {
     }
     PlayScene.prototype.initView = function () {
         this.sound = RES.getRes('go_mp3');
-        // TODO:
+        this.catRunning = false;
         this.x = (GameUtil.getStageWidth() - this.width);
         this.y = GameUtil.getStageHeight() / 2.5;
-        // TODO:
+        SceneController.showLevelTip();
     };
     PlayScene.prototype.catRun = function () {
         // TODO:

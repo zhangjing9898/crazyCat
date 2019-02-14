@@ -19,15 +19,16 @@ enum OverType {
 }
 
 class PlayScene extends BaseScene implements PlayListener {
-   
+    private catRunning: boolean
     private sound: egret.Sound  
 
     protected initView() {
         this.sound = RES.getRes('go_mp3')
-        // TODO:
+        this.catRunning = false
         this.x = (GameUtil.getStageWidth() - this.width)
         this.y = GameUtil.getStageHeight() / 2.5
-        // TODO:
+        
+        SceneController.showLevelTip()
     }
 
     public catRun() {
