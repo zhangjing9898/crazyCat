@@ -33,6 +33,28 @@ var GameUtil = (function () {
         var mcFactory_stay = new egret.MovieClipDataFactory(data_stay, texture_stay);
         return new egret.MovieClip(mcFactory_stay.generateMovieClipData(name));
     };
+    // 按钮
+    GameUtil.bitmapToBtn = function (bitmap, callback) {
+        bitmap.touchEnabled = true;
+        // 监听触摸事件
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_BEGIN, function () {
+            // 缩放
+            bitmap.scaleX = 0.95;
+            bitmap.scaleY = 0.95;
+        }, this);
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            reset();
+            callback && callback();
+        }, this);
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_CANCEL, reset, this);
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, reset, this);
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_END, reset, this);
+        function reset() {
+            // TODO:
+            bitmap.scaleX = 1;
+            bitmap.scaleY = 1;
+        }
+    };
     return GameUtil;
 }());
 __reflect(GameUtil.prototype, "GameUtil");

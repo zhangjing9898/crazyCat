@@ -29,4 +29,29 @@ class GameUtil {
         return new egret.MovieClip(mcFactory_stay.generateMovieClipData(name))
     }
 
+    // 按钮
+    public static bitmapToBtn(bitmap: egret.Bitmap, callback) {
+        bitmap.touchEnabled = true
+        // 监听触摸事件
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_BEGIN, ()=>{
+            // 缩放
+            bitmap.scaleX = 0.95
+            bitmap.scaleY = 0.95
+        }, this)
+
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
+            reset() 
+            callback && callback()
+        }, this)
+
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_CANCEL, reset, this);
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, reset, this);
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_END, reset, this);
+        function reset() {
+            // TODO:
+            bitmap.scaleX = 1
+            bitmap.scaleY = 1
+        }
+    }
+
 }
