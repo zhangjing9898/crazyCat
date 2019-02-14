@@ -39,13 +39,18 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     private createView(): void {
         this.textField = new egret.TextField();
         this.addChild(this.textField);
-        this.textField.y = 300;
         this.textField.width = 480;
         this.textField.height = 100;
+        // loading居中显示
+        this.textField.x = (GameUtil.getStageWidth() - this.textField.width)/2;
+        this.textField.y = (GameUtil.getStageHeight() - this.textField.height)/2;
         this.textField.textAlign = "center";
+        this.textField.text = `Loading...0%`;
     }
 
     public onProgress(current: number, total: number): void {
-        this.textField.text = `Loading...${current}/${total}`;
+        let per = current * 100 / total;
+        // toFixed() 方法可把 Number 四舍五入为指定小数位数的数字
+        this.textField.text = `Loading...${per.toFixed(0)}%`;
     }
 }
