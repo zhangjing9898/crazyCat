@@ -43,6 +43,10 @@ class GridNode extends egret.Sprite {
         this.changeBg()
     }
 
+    public getStatus(): GridNodeStatus {
+        return this.status
+    }
+
     private onAddToStage(event: egret.Event) {
         
     }

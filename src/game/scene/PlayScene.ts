@@ -27,6 +27,8 @@ class PlayScene extends BaseScene implements PlayListener {
     protected initView() {
         this.sound = RES.getRes('go_mp3')
         this.catRunning = false
+        this.createGridNode()
+        this.createBarrier(n.GameData.barrierNumber)
         this.x = (GameUtil.getStageWidth() - this.width)
         this.y = GameUtil.getStageHeight() / 2.5
         
@@ -34,9 +36,38 @@ class PlayScene extends BaseScene implements PlayListener {
     }
     // 初始化格子
     private createGridNode() {
-       
+        // any表示数组中允许出现任何类型
+       n.GameData.gridNodeList = new Array<Array<any>>(n.GameData.row)
+        // 根据屏幕宽度 定义列数和格子边距
+        let gridNodeSize = GameUtil.getStageWidth() / (n.GameData.row + 1) - n.GameData.gridMargin
+        for (let i = 0; i < n.GameData.row; ++i ) {
+            n.GameData.gridNodeList[i] = new Array<GridNode>(n.GameData.col)
+            // 偶数行缩进 半个node size
+            let indent = (i % 2) * (gridNodeSize / 2)
+            for (let j = 0; j < n.GameData.col; ++j) {
+                // i,j 数组下标 x,y 舞台上的坐标
+                let x = indent + j * (gridNodeSize + n.GameData.gridMargin)
+                let y = i * gridNodeSize
+                n.GameData.gridNodeList[i][j] = new GridNode(new Point(i,j), new Point(x, y), gridNodeSize, this)
+                n.GameData.gridNodeList[i][j].setStatus(GridNodeStatus.AVAILABLE)
+                // 添加到游戏场景中
+                this.addChild(n.GameData.gridNodeList[i][j])
+            }
+        }
     }
 
+    private createBarrier(num: number) {
+        while(num) {
+            let i = Math.floor(Math.random() * 100 % n.GameData.row)
+            let j = Math.floor(Math.random() * 100 % n.GameData.col)
+            let gridNode = n.GameData.gridNodeList[i][j]
+            // 填上障碍
+            if(i !== Math.floor(n.GameData.row / 2) && j !== Math.floor(n.GameData.col / 2) && gridNode.getStatus() === GridNodeStatus.AVAILABLE) {
+                gridNode.setStatus(GridNodeStatus.UNAVAILABLE)
+                num-- 
+            }
+        }
+    }
     public catRun() {
         
     }

@@ -42,6 +42,9 @@ var GridNode = (function (_super) {
         this.status = status;
         this.changeBg();
     };
+    GridNode.prototype.getStatus = function () {
+        return this.status;
+    };
     GridNode.prototype.onAddToStage = function (event) {
     };
     GridNode.prototype.init = function () {
