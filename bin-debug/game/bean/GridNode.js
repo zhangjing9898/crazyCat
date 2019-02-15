@@ -38,6 +38,9 @@ var GridNode = (function (_super) {
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         return _this;
     }
+    GridNode.prototype.setStatus = function (status) {
+        this.status = status;
+    };
     GridNode.prototype.onAddToStage = function (event) {
     };
     GridNode.prototype.init = function () {
@@ -56,6 +59,22 @@ var GridNode = (function (_super) {
         // 格子不能点击
         if (this.status !== GridNodeStatus.AVAILABLE) {
             return;
+        }
+    };
+    GridNode.prototype.changeBg = function () {
+        switch (this.status) {
+            // 空格子，可以run，白色bg
+            case GridNodeStatus.AVAILABLE:
+                this.bg.texture = this.gridBg.white.texture;
+                break;
+            // 有障碍物，不可以走，黄色背景
+            case GridNodeStatus.UNAVAILABLE:
+                this.bg.texture = this.gridBg.yellow.texture;
+                break;
+            // 有猫，不可以走，白色背景
+            case GridNodeStatus.CAT:
+                this.bg.texture = this.gridBg.white.texture;
+                break;
         }
     };
     return GridNode;

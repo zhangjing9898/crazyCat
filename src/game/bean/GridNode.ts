@@ -38,6 +38,11 @@ class GridNode extends egret.Sprite {
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
     } 
 
+    public setStatus(status: GridNodeStatus) {
+        this.status = status
+    
+    }
+
     private onAddToStage(event: egret.Event) {
         
     }
@@ -62,6 +67,25 @@ class GridNode extends egret.Sprite {
             return
         }
 
+
+
         
+    }
+
+    private changeBg() {
+        switch(this.status) {
+            // 空格子，可以run，白色bg
+            case GridNodeStatus.AVAILABLE:
+                this.bg.texture = this.gridBg.white.texture
+            break;
+            // 有障碍物，不可以走，黄色背景
+            case GridNodeStatus.UNAVAILABLE:
+                this.bg.texture = this.gridBg.yellow.texture
+            break;
+            // 有猫，不可以走，白色背景
+            case GridNodeStatus.CAT:
+                this.bg.texture = this.gridBg.white.texture
+            break;
+        }
     }
 }
