@@ -12,7 +12,10 @@ class RunPath extends Point{
 }
 
 class SearchResult {
-
+    // 下一步
+    public nextStep: Point 
+    // 是否可以走出去
+    public hasPath: boolean = true
 }
 
 // 猫
@@ -42,6 +45,16 @@ class Cat extends egret.Sprite {
         this.playListener = playListener
         // 将instance 添加到stage上
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
+    }
+
+    public run() {
+        // this.playListener && this.playListener.catRun(this.search)
+    }
+
+    private search(): SearchResult {
+        let nextResult: SearchResult = new SearchResult()
+        nextResult.hasPath = false
+        return nextResult
     }
 
     private onAddToStage(event: egret.Event){

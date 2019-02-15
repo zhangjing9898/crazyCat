@@ -31,11 +31,8 @@ var PlayScene = (function (_super) {
     };
     // 初始化格子
     PlayScene.prototype.createGridNode = function () {
-        n.GameData.
-        ;
     };
     PlayScene.prototype.catRun = function () {
-        // TODO:
     };
     PlayScene.prototype.gameOver = function () {
     };
@@ -46,6 +43,7 @@ var PlayScene = (function (_super) {
         this.sound.play(0, 1);
         n.GameData.step++;
         this.catRunning = true;
+        this.cat.run();
     };
     PlayScene.prototype.canRun = function () {
         // TODO:

@@ -50,8 +50,20 @@ var SceneController = (function () {
             this.instance.playScene = new PlayScene();
         }
         var level = n.GameData.level;
-        if (level)
-            stage.addChild(this.instance.startScene);
+        // 保护
+        // 关卡超过已有的，那就直接用最后一关（也就是到了后面难度都是几乎一样的），避免数组越界
+        if (level >= n.GameData.levelData.length) {
+            level = n.GameData.levelData.length - 1;
+        }
+        // 设置关卡对应的数据
+        n.GameData.barrierNumber = n.GameData.levelData[level].barrierNumber;
+        n.GameData.row = n.GameData.levelData[level].row;
+        n.GameData.col = n.GameData.levelData[level].col;
+        // 重置游戏步数
+        n.GameData.step = 0;
+        n.GameData.overType = OverType.NULL;
+        console.log('进入showPlayScene');
+        stage.addChild(this.instance.playScene);
     };
     // 开始游戏时 显示关卡
     SceneController.showLevelTip = function () {

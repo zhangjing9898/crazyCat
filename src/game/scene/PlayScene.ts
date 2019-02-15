@@ -2,9 +2,9 @@ declare interface PlayListener {
     // 返回能否走
     canRun(): boolean
     // 用户走完
-    playerRun(): void
+    playerRun(nextStep: Point): void
     // 猫走完
-    catRun(): void
+    catRun(searchResult: SearchResult): void
     // 哪个赢 0：user 1：cat
     gameOver(type: number): void
 }
@@ -19,6 +19,8 @@ enum OverType {
 }
 
 class PlayScene extends BaseScene implements PlayListener {
+    
+    private cat: Cat
     private catRunning: boolean
     private sound: egret.Sound  
 
@@ -32,11 +34,11 @@ class PlayScene extends BaseScene implements PlayListener {
     }
     // 初始化格子
     private createGridNode() {
-        n.GameData.
+       
     }
 
     public catRun() {
-        // TODO:
+        
     }
 
     public gameOver() {
@@ -50,7 +52,7 @@ class PlayScene extends BaseScene implements PlayListener {
         this.sound.play(0, 1)
         n.GameData.step++
         this.catRunning = true
-        
+        this.cat.run()
     }
     public canRun() {
         // TODO:

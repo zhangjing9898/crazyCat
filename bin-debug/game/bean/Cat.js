@@ -27,6 +27,8 @@ var RunPath = (function (_super) {
 __reflect(RunPath.prototype, "RunPath");
 var SearchResult = (function () {
     function SearchResult() {
+        // 是否可以走出去
+        this.hasPath = true;
     }
     return SearchResult;
 }());
@@ -46,25 +48,43 @@ var Cat = (function (_super) {
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         return _this;
     }
+    Cat.prototype.run = function () {
+        // this.playListener && this.playListener.catRun(this.search)
+    };
+    Cat.prototype.search = function () {
+        var nextResult = new SearchResult();
+        nextResult.hasPath = false;
+        return nextResult;
+    };
     Cat.prototype.onAddToStage = function (event) {
+        this.init();
     };
     Cat.prototype.init = function () {
         this.bg = new egret.MovieClip();
         console.log('cat.ts中的bg', this.bg);
         this.addChild(this.bg);
+        // 猫猫可走
+        this.setStatus(CatStatus.AVAILABLE);
     };
     Cat.prototype.setStatus = function (status) {
         if (this.status === status) {
             return;
         }
         this.status = status;
+        this.changBg();
     };
     Cat.prototype.changBg = function () {
         switch (this.status) {
+            // 新版movieClip分为
+            // movieClipData 存储动画数据
+            // movieClipDataFactory data+texture纹理
             case CatStatus.AVAILABLE:
-                this.bg.movieClipData;
+                this.bg.movieClipData = this.catMovieClip.normal.movieClipData;
+                this.bg.play(-1);
                 break;
             case CatStatus.UNAVAILABLE:
+                this.bg.movieClipData = this.catMovieClip.loser.movieClipData;
+                this.bg.play(-1);
                 break;
         }
     };
