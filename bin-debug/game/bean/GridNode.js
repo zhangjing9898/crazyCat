@@ -40,6 +40,7 @@ var GridNode = (function (_super) {
     }
     GridNode.prototype.setStatus = function (status) {
         this.status = status;
+        this.changeBg();
     };
     GridNode.prototype.onAddToStage = function (event) {
     };
@@ -60,6 +61,8 @@ var GridNode = (function (_super) {
         if (this.status !== GridNodeStatus.AVAILABLE) {
             return;
         }
+        // touch set barrier
+        this.setStatus(GridNodeStatus.UNAVAILABLE);
     };
     GridNode.prototype.changeBg = function () {
         switch (this.status) {

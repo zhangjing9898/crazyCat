@@ -43,8 +43,14 @@ class PlayScene extends BaseScene implements PlayListener {
 
     }
 
-    public playerRun() {
-
+    public playerRun(index: Point) {
+        // sound 播放音频 play有2个params
+        // startTime 默认0 声音开始播放的位置
+        // loops 播放次数 <=0 为无限播放 >0 按照对应值为播放次数
+        this.sound.play(0, 1)
+        n.GameData.step++
+        this.catRunning = true
+        
     }
     public canRun() {
         // TODO:

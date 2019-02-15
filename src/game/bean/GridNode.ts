@@ -40,7 +40,7 @@ class GridNode extends egret.Sprite {
 
     public setStatus(status: GridNodeStatus) {
         this.status = status
-    
+        this.changeBg()
     }
 
     private onAddToStage(event: egret.Event) {
@@ -66,9 +66,9 @@ class GridNode extends egret.Sprite {
         if (this.status !== GridNodeStatus.AVAILABLE) {
             return
         }
-
-
-
+        // touch set barrier
+        this.setStatus(GridNodeStatus.UNAVAILABLE);
+        
         
     }
 
