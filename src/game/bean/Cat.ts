@@ -45,14 +45,15 @@ class Cat extends egret.Sprite {
     }
 
     private onAddToStage(event: egret.Event){
-        
+        this.init()
     }
 
     private init() {
         this.bg = new egret.MovieClip()
         console.log('cat.ts中的bg', this.bg)
         this.addChild(this.bg)
-
+        // 猫猫可走
+        this.setStatus(CatStatus.AVAILABLE)
     }
 
     private setStatus(status: CatStatus) {
@@ -60,17 +61,22 @@ class Cat extends egret.Sprite {
             return
         }
         this.status = status
-
+        this.changBg()
     }
 
     private changBg() {
         switch(this.status) {
+            // 新版movieClip分为
+            // movieClipData 存储动画数据
+            // movieClipDataFactory data+texture纹理
             case CatStatus.AVAILABLE:
-                this.bg.movieClipData
-            break
+                this.bg.movieClipData = this.catMovieClip.normal.movieClipData
+                this.bg.play(-1)
+                break
             case CatStatus.UNAVAILABLE:
-
-            break
+                this.bg.movieClipData = this.catMovieClip.loser.movieClipData
+                this.bg.play(-1)
+                break
         }
     }
 }
