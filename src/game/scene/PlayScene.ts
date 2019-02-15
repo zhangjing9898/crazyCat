@@ -1,9 +1,9 @@
 declare interface PlayListener {
     // 返回能否走
     canRun(): boolean
-    // 用户走完
+    // 用户走
     playerRun(nextStep: Point): void
-    // 猫走完
+    // 猫走
     catRun(searchResult: SearchResult): void
     // 哪个赢 0：user 1：cat
     gameOver(type: number): void
@@ -78,8 +78,11 @@ class PlayScene extends BaseScene implements PlayListener {
         this.cat.move(new Point(i, j))
     }
 
-    public catRun() {
-        
+    public catRun(searchResult: SearchResult) {
+        if (!searchResult.hasPath) {
+            // 被包围了，切换状态
+            this.cat.setStatus(CatStatus.UNAVAILABLE)
+        }
     }
 
     public gameOver() {
@@ -96,7 +99,6 @@ class PlayScene extends BaseScene implements PlayListener {
         this.cat.run()
     }
     public canRun() {
-        // TODO:
-        return true
+        return !this.catRunning
     }
 }

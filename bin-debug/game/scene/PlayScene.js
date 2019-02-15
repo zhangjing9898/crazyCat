@@ -72,7 +72,11 @@ var PlayScene = (function (_super) {
         this.addChild(this.cat);
         this.cat.move(new Point(i, j));
     };
-    PlayScene.prototype.catRun = function () {
+    PlayScene.prototype.catRun = function (searchResult) {
+        if (!searchResult.hasPath) {
+            // 被包围了，切换状态
+            this.cat.setStatus(CatStatus.UNAVAILABLE);
+        }
     };
     PlayScene.prototype.gameOver = function () {
     };
@@ -86,8 +90,7 @@ var PlayScene = (function (_super) {
         this.cat.run();
     };
     PlayScene.prototype.canRun = function () {
-        // TODO:
-        return true;
+        return !this.catRunning;
     };
     return PlayScene;
 }(BaseScene));

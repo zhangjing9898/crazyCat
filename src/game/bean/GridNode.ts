@@ -76,8 +76,7 @@ class GridNode extends egret.Sprite {
         }
         // touch set barrier
         this.setStatus(GridNodeStatus.UNAVAILABLE);
-        
-        
+        this.playListener.playerRun(this.index)
     }
 
     private changeBg() {

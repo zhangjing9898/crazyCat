@@ -70,6 +70,7 @@ var GridNode = (function (_super) {
         }
         // touch set barrier
         this.setStatus(GridNodeStatus.UNAVAILABLE);
+        this.playListener.playerRun(this.index);
     };
     GridNode.prototype.changeBg = function () {
         switch (this.status) {
