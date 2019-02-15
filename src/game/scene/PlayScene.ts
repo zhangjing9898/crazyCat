@@ -29,6 +29,7 @@ class PlayScene extends BaseScene implements PlayListener {
         this.catRunning = false
         this.createGridNode()
         this.createBarrier(n.GameData.barrierNumber)
+        this.createCat()
         this.x = (GameUtil.getStageWidth() - this.width) / 2
         this.y = GameUtil.getStageHeight() / 2.5
         
@@ -68,6 +69,15 @@ class PlayScene extends BaseScene implements PlayListener {
             }
         }
     }
+
+    private createCat() {
+        let i = Math.floor(n.GameData.row / 2)
+        let j = Math.floor(n.GameData.col / 2)
+        this.cat = new Cat(this)
+        this.addChild(this.cat)
+        this.cat.move(new Point(i, j))
+    }
+
     public catRun() {
         
     }

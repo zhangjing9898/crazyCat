@@ -23,7 +23,7 @@ class GameUtil {
     // MovieClip又称之为”影片剪辑”，是Egret中提供的一种动画解决方案。我们通常会将MovieClip简写为 MC 。 实际上一个 MC 所实现的功能就是播放序列帧动画
     public static createMovieClipByName(name: string): egret.MovieClip {
         let data_stay: any = RES.getRes(name + "_json")
-        console.log(data_stay)
+        console.log('game util movieClipByName', data_stay)
         let texture_stay: egret.Texture = RES.getRes(name + "_png")
         let mcFactory_stay: egret.MovieClipDataFactory = new egret.MovieClipDataFactory(data_stay, texture_stay)
         return new egret.MovieClip(mcFactory_stay.generateMovieClipData(name))

@@ -27,6 +27,7 @@ var PlayScene = (function (_super) {
         this.catRunning = false;
         this.createGridNode();
         this.createBarrier(n.GameData.barrierNumber);
+        this.createCat();
         this.x = (GameUtil.getStageWidth() - this.width) / 2;
         this.y = GameUtil.getStageHeight() / 2.5;
         SceneController.showLevelTip();
@@ -63,6 +64,13 @@ var PlayScene = (function (_super) {
                 num--;
             }
         }
+    };
+    PlayScene.prototype.createCat = function () {
+        var i = Math.floor(n.GameData.row / 2);
+        var j = Math.floor(n.GameData.col / 2);
+        this.cat = new Cat(this);
+        this.addChild(this.cat);
+        this.cat.move(new Point(i, j));
     };
     PlayScene.prototype.catRun = function () {
     };

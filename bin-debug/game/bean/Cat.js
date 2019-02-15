@@ -88,6 +88,21 @@ var Cat = (function (_super) {
                 break;
         }
     };
+    Cat.prototype.move = function (nextStep) {
+        if (nextStep === void 0) { nextStep = this.index; }
+        if (!nextStep.equal(this.index)) {
+            if (this.gridNode) {
+                this.gridNode.setStatus(GridNodeStatus.AVAILABLE);
+            }
+            this.gridNode = n.GameData.gridNodeList[nextStep.x][nextStep.y];
+            this.gridNode.setStatus(GridNodeStatus.CAT);
+            this.index = nextStep;
+            // 传入的nextStep的x和y是格子数 需要加边距等
+            this.x = this.gridNode.x + (this.gridNode.width - this.bg.width) / 2;
+            console.log('cat move', this.gridNode.x, this.gridNode.width, this.bg.width);
+            this.y = this.gridNode.y - this.bg.height + this.gridNode.height / 2;
+        }
+    };
     return Cat;
 }(egret.Sprite));
 __reflect(Cat.prototype, "Cat");
