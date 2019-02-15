@@ -49,7 +49,9 @@ var SceneController = (function () {
             stage.removeChild(this.instance.playScene);
             this.instance.playScene = new PlayScene();
         }
-        stage.addChild(this.instance.startScene);
+        var level = n.GameData.level;
+        if (level)
+            stage.addChild(this.instance.startScene);
     };
     // 开始游戏时 显示关卡
     SceneController.showLevelTip = function () {

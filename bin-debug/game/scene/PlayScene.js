@@ -29,6 +29,11 @@ var PlayScene = (function (_super) {
         this.y = GameUtil.getStageHeight() / 2.5;
         SceneController.showLevelTip();
     };
+    // 初始化格子
+    PlayScene.prototype.createGridNode = function () {
+        n.GameData.
+        ;
+    };
     PlayScene.prototype.catRun = function () {
         // TODO:
     };

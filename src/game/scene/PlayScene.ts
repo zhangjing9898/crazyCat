@@ -30,6 +30,10 @@ class PlayScene extends BaseScene implements PlayListener {
         
         SceneController.showLevelTip()
     }
+    // 初始化格子
+    private createGridNode() {
+        n.GameData.
+    }
 
     public catRun() {
         // TODO:

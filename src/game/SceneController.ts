@@ -58,6 +58,8 @@ class SceneController {
             stage.removeChild(this.instance.playScene)
             this.instance.playScene = new PlayScene()
         }
+        let level = n.GameData.level
+        if (level)
 
         stage.addChild(this.instance.startScene)
     }

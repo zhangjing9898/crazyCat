@@ -9,8 +9,8 @@
 	],
 	"game": [
 		"bin-debug/game/scene/BaseScene.js",
+		"bin-debug/game/scene/PlayScene.js",
 		"bin-debug/game/bean/Cat.js",
-		"bin-debug/Platform.js",
 		"bin-debug/common/GameUtil.js",
 		"bin-debug/game/GameData.js",
 		"bin-debug/game/SceneController.js",
@@ -19,7 +19,7 @@
 		"bin-debug/game/bean/Point.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/game/scene/EndScene.js",
-		"bin-debug/game/scene/PlayScene.js",
+		"bin-debug/Platform.js",
 		"bin-debug/game/scene/StartScene.js"
 	]
 }
