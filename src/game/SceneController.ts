@@ -103,8 +103,8 @@ class SceneController {
         info.stroke = 2
         info.size = 60
         info.text = `第${level}关`
-        info.x = (GameUtil.getStageWidth() - info.width)
-        info.y = (GameUtil.getStageHeight() - info.height)
+        info.x = (GameUtil.getStageWidth() - info.width) / 2
+        info.y = (GameUtil.getStageHeight() - info.height) / 2
         bg.addChild(info)
 
         // tween为缓动动画类

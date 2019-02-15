@@ -29,7 +29,7 @@ class PlayScene extends BaseScene implements PlayListener {
         this.catRunning = false
         this.createGridNode()
         this.createBarrier(n.GameData.barrierNumber)
-        this.x = (GameUtil.getStageWidth() - this.width)
+        this.x = (GameUtil.getStageWidth() - this.width) / 2
         this.y = GameUtil.getStageHeight() / 2.5
         
         SceneController.showLevelTip()

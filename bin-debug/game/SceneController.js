@@ -91,8 +91,8 @@ var SceneController = (function () {
         info.stroke = 2;
         info.size = 60;
         info.text = "\u7B2C" + level + "\u5173";
-        info.x = (GameUtil.getStageWidth() - info.width);
-        info.y = (GameUtil.getStageHeight() - info.height);
+        info.x = (GameUtil.getStageWidth() - info.width) / 2;
+        info.y = (GameUtil.getStageHeight() - info.height) / 2;
         bg.addChild(info);
         // tween为缓动动画类
         egret.Tween.get(info).wait(500).to({
