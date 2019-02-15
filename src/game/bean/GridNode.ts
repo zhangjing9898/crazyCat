@@ -48,12 +48,16 @@ class GridNode extends egret.Sprite {
     }
 
     private onAddToStage(event: egret.Event) {
-        
+        this.init()
     }
 
     private init() {
         this.touchEnabled = true
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.touch, this);
+        this.addChild(this.bg)
+        this.x = this.pos.x
+        this.y = this.pos.y
+
     }
 
     private touch() {

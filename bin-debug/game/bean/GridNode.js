@@ -46,10 +46,14 @@ var GridNode = (function (_super) {
         return this.status;
     };
     GridNode.prototype.onAddToStage = function (event) {
+        this.init();
     };
     GridNode.prototype.init = function () {
         this.touchEnabled = true;
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.touch, this);
+        this.addChild(this.bg);
+        this.x = this.pos.x;
+        this.y = this.pos.y;
     };
     GridNode.prototype.touch = function () {
         // 没有监听事件
