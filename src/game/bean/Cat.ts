@@ -76,6 +76,11 @@ class Cat extends egret.Sprite {
         this.changBg()
     }
 
+    // 获得目前猫的位置
+    public getIndex(): Point {
+        return this.index
+    }
+
     private changBg() {
         switch(this.status) {
             // 新版movieClip分为

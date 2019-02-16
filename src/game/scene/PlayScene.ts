@@ -83,6 +83,11 @@ class PlayScene extends BaseScene implements PlayListener {
             // 被包围了，切换状态
             this.cat.setStatus(CatStatus.UNAVAILABLE)
         }
+        let nextStep = searchResult.nextStep
+        // 下一步和当前所在位置一样，说明无路可走，玩家win
+        if (nextStep.equal(this.cat.getIndex())) {
+
+        }
     }
 
     public gameOver() {
@@ -100,5 +105,11 @@ class PlayScene extends BaseScene implements PlayListener {
     }
     public canRun() {
         return !this.catRunning
+    }
+
+    // 游戏结束
+    public gameOver(type: OverType) {
+        n.GameData.overType = type
+        
     }
 }

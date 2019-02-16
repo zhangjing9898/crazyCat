@@ -120,4 +120,10 @@ class SceneController {
             alpha: 0
         }, 1000, egret.Ease.sineIn)
     }
+
+    // 显示游戏结束场景
+    public static showEndScene() {
+        let stage: egret.DisplayObjectContainer = this.instance._stage
+        
+    }
 }
