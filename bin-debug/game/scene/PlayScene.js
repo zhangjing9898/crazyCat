@@ -80,7 +80,16 @@ var PlayScene = (function (_super) {
         var nextStep = searchResult.nextStep;
         // 下一步和当前所在位置一样，说明无路可走，玩家win
         if (nextStep.equal(this.cat.getIndex())) {
+            this.gameOver(OverType.PLAYER);
+            return;
         }
+        this.cat.move(nextStep);
+        // 猫猫到达边界 cat win
+        // 上左 + 下 + 右
+        if (nextStep.x * nextStep.y === 0 || nextStep.x === n.GameData.row - 1 || nextStep.y === n.GameData.col - 1) {
+            this.gameOver(OverType.CAT);
+        }
+        this.catRunning = false;
     };
     PlayScene.prototype.playerRun = function (index) {
         // sound 播放音频 play有2个params

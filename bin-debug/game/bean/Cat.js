@@ -20,8 +20,16 @@ var CatStatus;
 var RunPath = (function (_super) {
     __extends(RunPath, _super);
     function RunPath() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.step = 0;
+        return _this;
     }
+    RunPath.prototype.copy = function () {
+        var n = new RunPath(this.x, this.y);
+        n.step = this.step;
+        n.firstStep = this.firstStep.copy();
+        return n;
+    };
     return RunPath;
 }(Point));
 __reflect(RunPath.prototype, "RunPath");
@@ -49,7 +57,7 @@ var Cat = (function (_super) {
         return _this;
     }
     Cat.prototype.run = function () {
-        //  this.playListener && this.playListener.catRun(this.search)
+        this.playListener && this.playListener.catRun(this.search);
     };
     Cat.prototype.search = function () {
         var nextResult = new SearchResult();

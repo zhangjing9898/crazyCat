@@ -8,7 +8,15 @@ enum CatStatus {
 
 // 猫猫走的路径
 class RunPath extends Point{
+    public step: number = 0
+    public firstStep: Point
 
+    public copy(): RunPath {
+        let n = new RunPath(this.x, this.y)
+        n.step = this.step
+        n.firstStep = this.firstStep.copy()
+        return n 
+    }
 }
 
 class SearchResult {
@@ -47,7 +55,7 @@ class Cat extends egret.Sprite {
     }
 
     public run() {
-    //  this.playListener && this.playListener.catRun(this.search)
+        this.playListener && this.playListener.catRun(this.search)
     }
 
     private search(): SearchResult {
