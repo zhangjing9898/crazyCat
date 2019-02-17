@@ -54,6 +54,45 @@ class EndScene extends BaseScene {
 
     // 猫猫赢 pop-up
     private initCatWin() {
-        
+        let bg: egret.Bitmap = GameUtil.createBitmapByName('end_tip_fail')
+        this.addChild(bg)
+        bg.x = (GameUtil.getStageWidth() - bg.width) / 2
+        bg.y = (GameUtil.getStageHeight() - bg.height) / 2
+
+        let info: egret.TextField = new egret.TextField()
+        info.bold = true
+        info.textColor = 0xffffff
+        info.strokeColor = 0x000000
+        info.stroke = 2
+        info.lineSpacing = 10
+        info.text = `您坚持了${n.GameData.level}关\n还是让神经猫逃跑了！！！`
+        // (bg.width - info.width) / 2 保证其居中 再加上bg的横坐标
+        info.x = (bg.width - info.width) / 2 + bg.x
+        info.y = (bg.height - info.height) / 2 + bg.y + 50
+        this.addChild(info)
+
+        let sound: egret.Sound = RES.getRes('fail_mp3')
+        sound.play(0, 1)
+
+        let backBtn: egret.Bitmap = GameUtil.createBitmapByName('btn_back')
+        this.addChild(backBtn)
+        backBtn.x = (GameUtil.getStageWidth() - backBtn.width) / 2 -backBtn.width / 2
+        backBtn.y = bg.y + bg.height
+
+        GameUtil.bitmapToBtn(backBtn, ()=> {
+            console.log('返回首页')
+            n.GameData.level = 0 
+            SceneController.initGame()
+        })
+
+        let replayBtn: egret.Bitmap = GameUtil.createBitmapByName('btn_replay')
+        this.addChild(replayBtn)
+        replayBtn.x = (GameUtil.getStageWidth() - replayBtn.width) / 2 + replayBtn.width / 2
+        replayBtn.y = bg.y + bg.height
+        GameUtil.bitmapToBtn(replayBtn, ()=> {
+            console.log('重新开始')
+            n.GameData.level = 0
+            SceneController.showPlayScene()
+        })
     }
 }
