@@ -90,10 +90,6 @@ class PlayScene extends BaseScene implements PlayListener {
         }
     }
 
-    public gameOver() {
-
-    }
-
     public playerRun(index: Point) {
         // sound 播放音频 play有2个params
         // startTime 默认0 声音开始播放的位置
@@ -110,6 +106,6 @@ class PlayScene extends BaseScene implements PlayListener {
     // 游戏结束
     public gameOver(type: OverType) {
         n.GameData.overType = type
-        
+        SceneController.showEndScene()
     }
 }

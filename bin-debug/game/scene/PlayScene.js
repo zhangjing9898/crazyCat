@@ -82,8 +82,6 @@ var PlayScene = (function (_super) {
         if (nextStep.equal(this.cat.getIndex())) {
         }
     };
-    PlayScene.prototype.gameOver = function () {
-    };
     PlayScene.prototype.playerRun = function (index) {
         // sound 播放音频 play有2个params
         // startTime 默认0 声音开始播放的位置
@@ -99,6 +97,7 @@ var PlayScene = (function (_super) {
     // 游戏结束
     PlayScene.prototype.gameOver = function (type) {
         n.GameData.overType = type;
+        SceneController.showEndScene();
     };
     return PlayScene;
 }(BaseScene));

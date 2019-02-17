@@ -6,7 +6,7 @@ var SceneController = (function () {
     function SceneController() {
         this.startScene = new StartScene();
         this.playScene = new PlayScene();
-        // this.endScene = new EndScene();
+        this.endScene = new EndScene();
     }
     Object.defineProperty(SceneController, "instance", {
         get: function () {
@@ -30,11 +30,11 @@ var SceneController = (function () {
             stage.removeChild(this.instance.playScene);
             this.instance.playScene = new PlayScene();
         }
-        // if (this.instance.endScene.parent) {
-        //     // 如果有结束场景，移除掉
-        //     stage.removeChild(this.instance.endScene)
-        //     // TODO:
-        // }
+        if (this.instance.endScene.parent) {
+            // 如果有结束场景，移除掉
+            stage.removeChild(this.instance.endScene);
+            this.instance.endScene = new EndScene();
+        }
         // 添加开始场景
         stage.addChild(this.instance.startScene);
     };
@@ -109,6 +109,7 @@ var SceneController = (function () {
     // 显示游戏结束场景
     SceneController.showEndScene = function () {
         var stage = this.instance._stage;
+        stage.addChild(this.instance.endScene);
     };
     return SceneController;
 }());
