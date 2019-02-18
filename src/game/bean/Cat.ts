@@ -55,13 +55,23 @@ class Cat extends egret.Sprite {
     }
 
     public run() {
-        this.playListener && this.playListener.catRun(this.search)
+        this.playListener && this.playListener.catRun(this.search())
     }
-
+    // 返回值 nextStep
     private search(): SearchResult {
-        let nextResult: SearchResult = new SearchResult()
-        nextResult.hasPath = false
-        return nextResult
+        // 记录每个格子走到的最小步数
+        let temp: Array<Array<number>> = new Array(n.GameData.row)
+        // 初始化每个格子的步数记录 set = 最大值
+        for (let i = 0; i < n.GameData.row; ++i) {
+            temp[i] = new Array<number>(n.GameData.col)
+            for (let j = 0; j < n.GameData.col; ++j) {
+                // Number.MAX_VALUE 返回Javascript中的最大数：
+                temp[i][j] = Number.MAX_VALUE
+            }
+        }
+
+        // 获取第一步可走的位置
+        let firstStepList
     }
 
     private onAddToStage(event: egret.Event){
@@ -74,6 +84,50 @@ class Cat extends egret.Sprite {
         this.addChild(this.bg)
         // 猫猫可走
         this.setStatus(CatStatus.AVAILABLE)
+    }
+
+    // 猫猫获取第一步
+    private getFirstStep(): Array<RunPath> {
+        let firstStepList = new Array<RunPath>()
+
+        let dir = this.getDir(this.index.x)
+
+        for (let i = 0;i < dir.length; ++i) {
+            // dir[i][0] x轴
+            let x = this.index.x + dir[i][0]
+            // dir[i][1] y轴
+            let y = this.index.y + dir[i][1]
+
+            // 越界 结束本次循环 进入下一个循环
+            if (x < 0 || y < 0 || x >= n.GameData.row || y >= n.GameData.col) {
+                continue
+            }
+
+            // 不可走 结束本次循环 进入下一个循环
+            if (n.GameData.gridNodeList[x][y].getStatus() !== GridNodeStatus.AVAILABLE) {
+                continue
+            }
+
+            let runPath: RunPath = new RunPath(x, y)
+            runPath.step = 1
+            runPath.firstStep = new Point(x, y)
+            firstStepList.push(runPath)
+        }
+        return firstStepList
+        
+    }
+
+    private getDir(col) {
+        let t = col % 2
+        let dir: number[][] = [
+            [0,-1],
+            [0,1],
+            [-1, t - 1],
+            [-1, t * 1],
+            [1, t - 1],
+            [1, t * 1]
+        ]
+        return dir
     }
 
     public setStatus(status: CatStatus) {
