@@ -88,7 +88,18 @@ var Cat = (function (_super) {
             // 取出第一个
             var current = list.shift();
             // exception处理 猫到边界
-            if () {
+            if (current.x === 0 || current.y === 0 || current.x === n.GameData.row - 1 || current.y === n.GameData.col - 1) {
+                // 如果当前步数少于最少步数，那么把之前记录的路径集合清掉，保存当前记录
+                if (current.step < minStep) {
+                    result = new Array();
+                    result.push(current.firstStep.copy());
+                    minStep = current.step;
+                }
+                else if (current.step === minStep) {
+                    // 如果相等，那么添加进路径集合
+                    result.push(current.firstStep.copy());
+                }
+                continue;
             }
             // 获取当前位置的可走方向（因为单双行缩进不一样导致数组下标不一样，所以需要根据行数获取可走方向）
             var dir = this.getDir(current.x);
@@ -98,10 +109,11 @@ var Cat = (function (_super) {
                 t.y += dir[i][1];
                 t.step = current.step + 1;
                 // exception 越界
-                if () {
+                if (t.x < 0 || t.y < 0 || t.x === n.GameData.row || t.y === n.GameData.col) {
+                    continue;
                 }
                 // 有猫或者障碍物
-                if () {
+                if (n.GameData.gridNodeList[t.x][t.y].getStatus() !== GridNodeStatus.AVAILABLE) {
                     continue;
                 }
                 if (temp[t.x][t.y] > t.step) {
