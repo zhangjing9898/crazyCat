@@ -11,9 +11,11 @@ class EndScene extends BaseScene {
         switch(n.GameData.overType) {
             case OverType.PLAYER:
                 console.log('玩家赢')
+                this.initPlayerWin()
                 break
             case OverType.CAT:
                 console.log('猫猫赢')
+                this.initCatWin()
                 break
         }
     }
