@@ -50,7 +50,7 @@ var SceneController = (function () {
             this.instance.playScene = new PlayScene();
         }
         if (this.instance.endScene.parent) {
-            stage.removeChild(this.instance.playScene);
+            stage.removeChild(this.instance.endScene);
             this.instance.endScene = new EndScene;
         }
         var level = n.GameData.level;

@@ -59,7 +59,7 @@ var EndScene = (function (_super) {
         GameUtil.bitmapToBtn(nextBtn, function () {
             console.log('进入下一关');
             n.GameData.level++;
-            SceneController.showEndScene();
+            SceneController.showPlayScene();
         });
     };
     // 猫猫赢 pop-up

@@ -6,7 +6,7 @@ namespace n {
         // 每个关卡对应的初始化数据
         public static levelData: Array<any> = [
             {
-                barrierNumber: 10,
+                barrierNumber: 26,
                 row: 7,
                 col: 7
             },

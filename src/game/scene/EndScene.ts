@@ -50,7 +50,7 @@ class EndScene extends BaseScene {
         GameUtil.bitmapToBtn(nextBtn, ()=> {
             console.log('进入下一关')
             n.GameData.level++
-            SceneController.showEndScene()
+            SceneController.showPlayScene()
         })
     }
 
