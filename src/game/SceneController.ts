@@ -58,6 +58,10 @@ class SceneController {
             stage.removeChild(this.instance.playScene)
             this.instance.playScene = new PlayScene()
         }
+        if (this.instance.endScene.parent) {
+            stage.removeChild(this.instance.playScene)
+            this.instance.endScene = new EndScene
+        }
         let level = n.GameData.level
         // 保护
         // 关卡超过已有的，那就直接用最后一关（也就是到了后面难度都是几乎一样的），避免数组越界
