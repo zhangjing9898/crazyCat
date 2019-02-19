@@ -71,8 +71,108 @@ var Cat = (function (_super) {
                 temp[i][j] = Number.MAX_VALUE;
             }
         }
-        // 获取第一步可走的位置
-        var firstStepList;
+        // 取第一步 可走的位置
+        var firstStepList = this.getFirstStep();
+        var list = new Array();
+        // 存放到路径列表
+        firstStepList.forEach(function (item) {
+            temp[item.x][item.y] = 1;
+            list.push(item.copy());
+        });
+        // 上面的list：return一个array 每个值是point对象 有step和可走的路的下标 eg：(3,4)
+        // 初始化 最小步数为最大值
+        var minStep = Number.MAX_VALUE;
+        // 存放路径集合
+        var result = new Array();
+        while (list.length) {
+            // 取出第一个
+            var current = list.shift();
+            // exception处理 猫到边界
+            if () {
+            }
+            // 获取当前位置的可走方向（因为单双行缩进不一样导致数组下标不一样，所以需要根据行数获取可走方向）
+            var dir = this.getDir(current.x);
+            for (var i = 0; i < dir.length; ++i) {
+                var t = new RunPath(current.x, current.y);
+                t.x += dir[i][0];
+                t.y += dir[i][1];
+                t.step = current.step + 1;
+                // exception 越界
+                if () {
+                }
+                // 有猫或者障碍物
+                if () {
+                    continue;
+                }
+                if (temp[t.x][t.y] > t.step) {
+                    temp[t.x][t.y] = t.step;
+                    t.firstStep = current.firstStep.copy();
+                    list.push(t);
+                }
+            }
+        }
+        var nextResult = new SearchResult();
+        if (minStep === Number.MAX_VALUE) {
+            // 无路可走 切换状态
+            this.setStatus(CatStatus.UNAVAILABLE);
+            nextResult.hasPath = false;
+        }
+        if (result.length === 0) {
+            // 没有路可以走出去，那就向四周随机走一格
+            firstStepList.forEach(function (item) {
+                result.push(item.firstStep);
+            });
+        }
+        if (result.length > 0) {
+            var list_1 = this.sortList(result);
+            // 从所有结果中 随机选一个 避免出现走固定路线
+            var index = Math.floor(Math.random() * list_1.length);
+            nextResult.nextStep = list_1[index];
+        }
+        else {
+            // 也就是result.length < 0 也就是没路可走 就走当前坐标 也就是初始化 基本不会出现这种情况
+            nextResult.nextStep = this.index;
+        }
+        return nextResult;
+    };
+    // 排序找出 可走路径最多的格子
+    Cat.prototype.sortList = function (list) {
+        var sort = new Array();
+        list.forEach(function (item) {
+            // Key为next step的坐标
+            var key = item.x + '-' + item.y;
+            var index = -1;
+            for (var i = 0; i < sort.length; ++i) {
+                if (sort[i].key === key) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index > -1) {
+                // count + 1
+                sort[index].count++;
+            }
+            else {
+                sort.push({
+                    key: key,
+                    value: item,
+                    count: 1
+                });
+            }
+        });
+        // 从多到少排序，数量多的就是走这一步之后有更多的路径方向可以走
+        // eg: sort=['3-4',{x:3,y:4},3],['1-4',{x:1,y:4},2] ...
+        sort.sort(function (a, b) {
+            return b.count - a.count;
+        });
+        var result = new Array();
+        sort.forEach(function (item) {
+            // 找到排行第一 也就是 count最多的
+            if (item.count === sort[0].count) {
+                result.push(new Point(item.value.x, item.value.y));
+            }
+        });
+        return result;
     };
     Cat.prototype.onAddToStage = function (event) {
         this.init();
@@ -106,6 +206,7 @@ var Cat = (function (_super) {
             runPath.firstStep = new Point(x, y);
             firstStepList.push(runPath);
         }
+        // return 一个数组 可走的所有方向的差值 下标值 eg(0, -1)
         return firstStepList;
     };
     Cat.prototype.getDir = function (col) {
