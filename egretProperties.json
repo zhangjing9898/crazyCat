@@ -21,5 +21,11 @@
     {
       "name": "promise"
     }
-  ]
+  ],
+  "targets": {
+    "android": {
+      "appname": "crazyCat",
+      "packagename": "com.companyname"
+    }
+  }
 }
